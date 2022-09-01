@@ -22,7 +22,7 @@ class UpSampleBlock(nn.Module):
         # C x H x W => C * (scale^2) x H x W => C x (scale * H) x (scale * W)  
         self.block = nn.Sequential(
             nn.Conv2d(channel, channel * scale_factor**2, kernel_size=3, stride=1, padding=1),
-            nn.PixelShuffle(2), 
+            nn.PixelShuffle(scale_factor), 
             nn.PReLU(channel) 
         )
     def forward(self, input):
